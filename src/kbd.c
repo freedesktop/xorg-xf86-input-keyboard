@@ -12,8 +12,7 @@
  * xf86Events.c and xf86Io.c which are
  * Copyright 1990,91 by Thomas Roell, Dinkelscherben, Germany.
  */
-/* $XdotOrg: xc/programs/Xserver/hw/xfree86/input/keyboard/kbd.c,v 1.10 2005/01/11 14:59:02 eich Exp $ */
-  
+
 #define NEED_EVENTS
 #include <X11/X.h>
 #include <X11/Xproto.h>
@@ -132,7 +131,11 @@ static const OptionInfoRec KeyboardOptions[] = {
 #endif
 
 static const char *kbdDefaults[] = {
+#if defined(__UNIXWARE__) || defined(XQUEUE)
+    "Protocol",		"Xqueue",
+#else
     "Protocol",		"standard",
+#endif
     "AutoRepeat",	"500 30",
     "XkbRules",		__XKBDEFRULES__,
     "XkbModel",		"pc105",
@@ -143,7 +146,11 @@ static const char *kbdDefaults[] = {
 };
 
 static const char *kbd98Defaults[] = {
+#if defined(__UNIXWARE__) || defined(XQUEUE)
+    "Protocol",		"Xqueue",
+#else
     "Protocol",		"standard",
+#endif
     "AutoRepeat",	"500 30",
     "XkbRules",		"xfree98",
     "XkbModel",		"pc98",
